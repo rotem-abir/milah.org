@@ -2,18 +2,33 @@ import wixWindow from 'wix-window';
 import wixData from 'wix-data';
 
 let myLang;
+let device;
 
 $w.onReady(function () {
     myLang = wixWindow.multilingual.currentLanguage;
-    if (myLang === 'en') {
-		changePosition( $w('#staffRepeater'), )
+	device = wixWindow.formFactor;
+
+	if(device === 'Desktop') {
+		if (myLang === 'en') {
+			toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
+		}
+		else if (myLang === 'he') {
+			toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+		}
 	}
-    else if (myLang === 'he') {
+	else {
+		$w("#datasetStaff").setSort( wixData.sort()
+			.descending("_createdDate") //.ascending("_createdDate")
+		);
+	}
+
+	changePosition( $w('#staffRepeater') )
+
+    if (myLang === 'he') {
 		$w('#datasetStaff').onReady( () => {
 			$w('#staffRepeater').onItemReady( ($w, itemData) => {
 				$w('#staffTitle').text = itemData.nameHe;
 				$w('#staffBio').text = itemData.infoHe;
-				changePosition( $w('#staffRepeater') )
 			});
 		});
 		$w('#datasetTeachers').onReady(function() {
@@ -23,13 +38,6 @@ $w.onReady(function () {
 			});
 		});
 	}
-
-	if(wixWindow.formFactor === "Mobile"){
-		$w("#datasetStaff").setSort( wixData.sort()
-			.ascending("_createdDate")
-			//.descending("order")
-		);
-	} 
 });
 
 function changePosition (repeater) {
@@ -53,4 +61,9 @@ function changePosition (repeater) {
 				break;
 		}
 	 });
+}
+
+function toggleLang (hideMe, showMe) {
+	hideMe.hide();
+	showMe.show();
 }
