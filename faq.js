@@ -6,11 +6,16 @@ $w.onReady(function () {
 
     myLang = wixWindow.multilingual.currentLanguage;
         if (myLang === 'en') {
-			$w('#faqEN').show();
-			$w('#faqHE').hide();
+			toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
+			toggleLang ( $w("#faqHE"), $w("#faqEN") );
 		}
         else if (myLang === 'he') {
-            $w('#faqHE').show();
-			$w('#faqEN').hide();
+			toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+			toggleLang ( $w("#faqEN"), $w("#faqHE") );
 		}
 });
+
+function toggleLang (hideMe, showMe) {
+	hideMe.hide();
+	showMe.show();
+}
