@@ -1,20 +1,24 @@
 $w.onReady(function () {
 
-	$w("#dataset1").onReady(function () {
+	$w("#datasetCourses").onReady(function () {
 
-		const  textMaxLength = 240;
+		const  textMaxLength = 260;
 		let fullText;
 		let shortText;
 
-		$w('#repeater').forEachItem(($w, item) => {
-			fullText = $w('#dataset1').getCurrentItem().infoEn;
-			if (fullText <= textMaxLength) {
+		$w("#repeater").onItemReady(($w, itemData, index)=> {
+			
+  			fullText = itemData.infoEn;
+
+			if (fullText.length <= textMaxLength) {
 				$w('#courseInfo').text = fullText;
 			}
 			else {
-				shortText = fullText.substr(0, textMaxLength) + "...";
+				shortText = fullText.substr(0, textMaxLength) + " ...";
 				$w('#courseInfo').text = shortText;
 			}
-		})
+
+		});
+
 	});
 });
