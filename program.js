@@ -6,7 +6,6 @@ let myLang;
 $w.onReady(function () {
 
 	myLang = wixWindow.multilingual.currentLanguage;
-
 	$w("#datasetCourses").onReady(function () {
 		let textMaxLength = 260;
 		let fullText;
@@ -71,13 +70,3 @@ export function typeTagsRTL_change(event) {
 		$w('#datasetCourses').setFilter(result);
 	}
 }
-
-
-/*
-courseType
-courseLevel
-hoursXX
-daysEn
-infoEn
-pauseEn
-*/
