@@ -15,6 +15,8 @@ $w.onReady(function () {
   				fullText = itemData.infoEn;
 			}
 			else if (myLang === "he") {
+				$w('#typeTagsLTR').hide();
+				$w('#typeTagsRTL').show();
 				$w('#courseLevel').text = itemData.courseLevelHe;
 				$w('#courseType').text = itemData.courseTypeHe;
   				fullText = itemData.infoHe;
@@ -32,8 +34,8 @@ $w.onReady(function () {
 
 });
 
-export function typeTags_change(event) {
-	let selectedTags = $w("#typeTags").value;
+export function typeTagsLTR_change(event) {
+	let selectedTags = $w("#typeTagsLTR").value;
 	let results;
 	if(selectedTags.length > 0) {
 		results = wixData.filter().hasAll("tags", selectedTags);
@@ -45,11 +47,26 @@ export function typeTags_change(event) {
 	}
 }
 
-/*
-courseType
-courseLevel
-hoursXX
-daysEn
-infoEn
-pauseEn
-*/
+export function typeTagsRTL_change(event) {
+	let selectedTags = $w("#typeTagsRTL").value;
+	let result;
+	if(selectedTags.length > 0) {
+		wixData.query("CoursesData")
+			.hasAll("tags", selectedTags)
+			.find()
+			.then( (results) => {
+				if (results.items.length === 0) {
+					$w("#noResaults").show();
+				}
+				else {
+					$w("#noResaults").hide();
+				}
+			});
+		result = wixData.filter().hasAll("tags", selectedTags);
+		$w('#datasetCourses').setFilter(result);
+	}
+	else {
+		result = wixData.filter().isNotEmpty("tags");
+		$w('#datasetCourses').setFilter(result);
+	}
+}
