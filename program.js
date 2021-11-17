@@ -3,6 +3,11 @@ import wixWindow from 'wix-window';
 
 let myLang;
 
+function toggleLang (hideMe, showMe) {
+	hideMe.hide();
+	showMe.show();
+}
+
 $w.onReady(function () {
 
 	myLang = wixWindow.multilingual.currentLanguage;
@@ -13,13 +18,15 @@ $w.onReady(function () {
 		let shortText;
 		$w("#repeater").onItemReady(($w, itemData, index)=> {
 			if (myLang === "en") {
+				toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
   				fullText = itemData.infoEn;
 			}
 			else if (myLang === "he") {
-				$w('#typeTagsLTR').hide();
-				$w('#typeTagsRTL').show();
+				toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+				toggleLang ( $w("#typeTagsLTR"), $w("#typeTagsRTL") );
 				$w('#courseLevel').text = itemData.courseLevelHe;
 				$w('#courseType').text = itemData.courseTypeHe;
+				$w('#infoButton').link += '-rtl?lang=he';
   				fullText = itemData.infoHe;
 				textMaxLength = 225;
 			}
