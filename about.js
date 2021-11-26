@@ -3,14 +3,12 @@ import wixWindow from 'wix-window';
 let myLang;
 
 $w.onReady(function () {
-    myLang = wixWindow.multilingual.currentLanguage;
-	if (myLang === 'en') {
+	myLang = wixWindow.multilingual.currentLanguage;
+	if (myLang === "en") {
 		toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
-		toggleLang ( $w("#faqHE"), $w("#faqEN") );
 	}
-	else if (myLang === 'he') {
+	else if (myLang === "he") {
 		toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
-		toggleLang ( $w("#faqEN"), $w("#faqHE") );
 	}
 });
 
