@@ -5,10 +5,10 @@ let myLang;
 $w.onReady(function () {
 	myLang = wixWindow.multilingual.currentLanguage;
 	if (myLang === "en") {
-        toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
+		toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
 	}
 	else if (myLang === "he") {
-		toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+        toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
 	}
 });
 

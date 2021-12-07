@@ -16,17 +16,18 @@ $w.onReady(function () {
 		let textMaxLength = 260;
 		let fullText;
 		let shortText;
-		$w("#repeater").onItemReady(($w, itemData, index)=> {
+		$w("#repeaterRTL").onItemReady(($w, itemData, index)=> {
 			if (myLang === "en") {
-				toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
+				toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
   				fullText = itemData.infoEn;
 			}
 			else if (myLang === "he") {
-				toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+				toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
 				toggleLang ( $w("#typeTagsLTR"), $w("#typeTagsRTL") );
 				$w('#courseLevel').text = itemData.courseLevelHe;
 				$w('#courseType').text = itemData.courseTypeHe;
 				$w('#infoButton').link += '-rtl?lang=he';
+				$w('#bookCover').link += '-rtl?lang=he';
   				fullText = itemData.infoHe;
 				textMaxLength = 225;
 			}
