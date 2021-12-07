@@ -1,30 +1,27 @@
 import wixWindow from 'wix-window';
 import wixData from 'wix-data';
 
-let myLang;
 let device;
+let myLang;
 
 $w.onReady(function () {
-    myLang = wixWindow.multilingual.currentLanguage;
 	device = wixWindow.formFactor;
+    myLang = wixWindow.multilingual.currentLanguage;
+	
+	changePosition( $w('#staffRepeater') )
 
-	if(device === 'Desktop') {
-		if (myLang === 'en') {
-			toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
-		}
-		else if (myLang === 'he') {
-			toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
-		}
-	}
-	else {
+	if (device !== 'Desktop') {
 		$w("#datasetStaff").setSort( wixData.sort()
 			.descending("_createdDate") //.ascending("_createdDate")
 		);
 	}
 
-	changePosition( $w('#staffRepeater') )
+	if (myLang === 'en') {
+		toggleLang ( $w("#navigationLTR"), $w("#navigationRTL") );
+	}
 
-    if (myLang === 'he') {
+    else if (myLang === 'he') {
+		toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
 		$w('#datasetStaff').onReady( () => {
 			$w('#staffRepeater').onItemReady( ($w, itemData) => {
 				$w('#staffTitle').text = itemData.nameHe;
