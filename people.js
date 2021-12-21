@@ -21,7 +21,6 @@ $w.onReady(function () {
 	}
 
     else if (myLang === 'he') {
-		toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
 		$w('#datasetStaff').onReady( () => {
 			$w('#staffRepeater').onItemReady( ($w, itemData) => {
 				$w('#staffTitle').text = itemData.nameHe;
@@ -34,6 +33,7 @@ $w.onReady(function () {
 				$w('#teachersBio').text = itemData.infoHe;
 			});
 		});
+		toggleLang ( $w("#navigationRTL"), $w("#navigationLTR") );
 	}
 });
 
